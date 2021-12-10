@@ -1,10 +1,11 @@
 from pathlib import Path
+import numpy as np
 
 def load_txt_to_list(day: int,
                      line_type: str, 
                      start: int = None, 
                      end: int = None,
-                    name:str = "input") -> list:
+                     name:str = "input") -> list:
     
     day_str = 'day' + str(day)
     
@@ -42,5 +43,10 @@ def get_matrix_from_txt(lines: list) -> list:
             #print("gap!")
             matrices.append(matrix)
             matrix = []
+    
+    # Append the last matrix if no blank line after       
+    matrices.append(matrix)
+    
+    nd_matrices = [np.array(matrix) for matrix in matrices]
             
-    return matrices
+    return nd_matrices
